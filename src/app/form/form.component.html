@@ -1,0 +1,36 @@
+<div class="body">
+  <h1>please enter your details</h1>
+  <div>
+    <input mdbInput type="text" placeholder="First Name" [(ngModel)]="user.FirstName" required /><br />
+    <input mdbInput type="text" placeholder="Last Name" [(ngModel)]="user.LastName" required /><br />
+    <input mdbInput type="text" placeholder="TZ" [(ngModel)]="user.TZ" (blur)="TZValidation()" required /><br />
+    <p *ngIf="!TZValidation()">the tz is not valid!</p>
+    <input mdbInput type="date" placeholder="Date Born" [(ngModel)]="user.DateBorn" required /><br />
+    <input type="radio" class="radio" value="male" name="gender" [(ngModel)]="user.Male"><span>Male</span>
+    <input type="radio" class="radio" value="female" name="gender" [(ngModel)]="user.Female"><span>Female</span>
+    <br />
+    <input type="radio" class="radio" value="Macabi" name="gender" [(ngModel)]="user.HMO"><span>Macabi</span>
+    <input type="radio" class="radio" value="Mauchedet" name="gender" [(ngModel)]="user.HMO"><span>Mauchedet</span>
+    <input type="radio" class="radio" value="Leumit" name="gender" [(ngModel)]="user.HMO"><span>Leumit</span>
+    <input type="radio" class="radio" value="Clalit" name="gender" [(ngModel)]="user.HMO"><span>Clalit</span><br />
+    <button (click)="addChild()">add child</button><br />
+    <div *ngIf="IfChild">
+      <input type="text" placeholder="FirstName" [(ngModel)]="child.FirstName" required /><br />
+      <input type="text" placeholder="LastName" [(ngModel)]="child.LastName" required /><br />
+      <input type="text" placeholder="TZ" [(ngModel)]="child.TZ" (blur)="TZChildValidation()" required /><br />
+      <p *ngIf="!TZChildValidation()">the tz is not valid!</p>
+      <input type="date" placeholder="DateTime" [(ngModel)]="child.DateBorn" required /><br />
+      <button (click)="saveChild()">saveChild</button>
+      <button (click)="cancel()">cancel</button>
+    </div>
+    <div *ngFor="let c of user.children;index as i">
+      <h4>child NO. {{i+1}}</h4>
+      FirstName: <span>{{c.FirstName}}</span><br />
+      LastName: <span>{{c.LastName}}</span><br />
+      DateBorn: <span>{{c.DateBorn}}</span><br />
+      TZ: <span>{{c.TZ}}</span><br />
+    </div>
+    <button type="submit" (click)="addUser()">save</button><br />
+    <button (click)="save()" routerLink="/login">Instructions</button>
+  </div>
+</div>
